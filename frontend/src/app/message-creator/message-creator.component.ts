@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import { RequestService } from '../request.service';
 
 
 @Component({
@@ -10,6 +11,7 @@ import {FormsModule} from '@angular/forms';
   styleUrl: './message-creator.component.css'
 })
 export class MessageCreatorComponent {
+  requestService = inject(RequestService)
   textMessage = {
     userId: null,
     message: "",
@@ -18,7 +20,7 @@ export class MessageCreatorComponent {
   }
   
   onSubmit() {
-    console.log(this.textMessage)
+    this.requestService.postData("text_messages", this.textMessage)
   }
 
   
