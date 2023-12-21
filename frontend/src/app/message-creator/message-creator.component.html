@@ -1,0 +1,9 @@
+<h2> New Message </h2>
+<form (ngSubmit)="onSubmit()" #messageCreator="ngForm">
+    <label>Phone Number: </label>
+    <input id="phoneNumber" type="text" name="phone" [(ngModel)]="textMessage['phoneNumber']"/>
+    <label>Message: </label>
+    <input id="message" type="text" name ="message" [(ngModel)]="textMessage['message']">
+    <button type="submit">Submit</button>
+</form>
+
