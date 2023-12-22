@@ -1,0 +1,6 @@
+<h2>Message History ({{data.length}})</h2>
+<ng-container class="message-group" >
+    @for (message of data; track message.id) {
+        <app-message-display [message]="message"></app-message-display>
+    }
+</ng-container>

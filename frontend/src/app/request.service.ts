@@ -20,9 +20,7 @@ export class RequestService {
     
 
     getData(url: string) {
-        return this.http.get(`${this.url_base}/${url}`, {observe: 'response'}).subscribe(res => {
-            console.log(res)
-        })
+        return this.http.get(`${this.url_base}/${url}`)
     }
 
     postData(url: string, params: any) {

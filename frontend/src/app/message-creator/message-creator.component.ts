@@ -16,12 +16,11 @@ export class MessageCreatorComponent {
     user_id: null,
     message: "",
     phoneNumber: "",
-    messageStatus: "unsent"
+    status: "unsent"
   }
   
   onSubmit() {
     this.requestService.postData("text_messages", this.textMessage)
   }
 
-  
 }
