@@ -1,6 +1,7 @@
 class TextMessagesController < ApplicationController
     def create
-        @message = TextMessage.new(message_params)
+        debugger
+        @message = TextMessage.new(text_message_params)
 
         if @message.save!
             # send_message(message_params)
@@ -13,5 +14,11 @@ class TextMessagesController < ApplicationController
 
     def index
 
+    end
+
+    private
+
+    def text_message_params
+        params.permit(:user_id, :phone_number, :message, :message_status)
     end
 end

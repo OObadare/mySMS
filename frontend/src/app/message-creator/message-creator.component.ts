@@ -13,7 +13,7 @@ import { RequestService } from '../request.service';
 export class MessageCreatorComponent {
   requestService = inject(RequestService)
   textMessage = {
-    userId: null,
+    user_id: null,
     message: "",
     phoneNumber: "",
     messageStatus: "unsent"
