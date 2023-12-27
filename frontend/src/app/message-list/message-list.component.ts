@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { RequestService } from '../request.service';
+import { RequestService } from '../services/request.service';
 import { MessageDisplayComponent } from '../message-display/message-display.component';
 import { AsyncPipe, NgIf } from '@angular/common';
 
@@ -18,7 +18,6 @@ export class MessageListComponent implements OnInit {
   fetchMessages() {
     this.requestService.getData("text_messages").subscribe( response => {
       this.data = response
-      console.log(response)
     })
   }
 

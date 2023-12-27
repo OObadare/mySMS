@@ -19,13 +19,11 @@ export class RequestService {
     }
     
 
-    getData(url: string) {
+    public getData(url: string) {
         return this.http.get(`${this.url_base}/${url}`)
     }
 
-    postData(url: string, params: any) {
-        return this.http.post(`${this.url_base}/${url}`, params, this.requestOptions).subscribe(res => {
-            console.log(res)
-        });
+    public postData(url: string, params: any) {
+        return this.http.post(`${this.url_base}/${url}`, params, this.requestOptions)
     }
 }
