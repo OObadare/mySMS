@@ -1,6 +1,7 @@
 class TextMessagesController < ApplicationController
     def create
         @message = TextMessage.new(text_message_params)
+        debugger
         if @message.save!
             twilio_service = TwilioService.new("+#{text_message_params[:phone_number]}")
             twilio_service.send_message(text_message_params[:message])

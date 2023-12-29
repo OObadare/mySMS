@@ -1,9 +1,17 @@
-<h1>MySMSApp</h1>
-<form (ngSubmit)="onSubmit($event)" #topBar="ngForm">
-    <label>Email: </label>
-    <input id="email" type="text" name="email" [(ngModel)]="userData.user['email']"/>
-    <label>Password: </label>
-    <input id="password" type="text" name ="password" [(ngModel)]="userData.user['password']">
-    <button type="submit" id="signup">Sign Up</button>
-    <button type="submit" id="login">Log In</button>
-</form>
+<div class="top-bar-holder">
+    <h1>MySMSApp</h1>
+    @if (!isLoggedIn) {
+        <form (ngSubmit)="onSubmit($event)" #topBar="ngForm">
+            <label>Email: </label>
+            <input id="email" type="text" name="email" [(ngModel)]="userData.user['email']"/>
+            <label>Password: </label>
+            <input id="password" type="text" name ="password" [(ngModel)]="userData.user['password']">
+            <button type="submit" id="signup">Sign Up</button>
+            <button type="submit" id="login">Log In</button>
+        </form>
+    } @else {
+        <p>Welcome, {{this.storageService.getUser().email}}</p>
+        <button (click)="onSignout()"> Sign Out </button>
+    }
+
+</div>
