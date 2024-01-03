@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RequestService } from '../services/request.service';
+import { StorageService } from '../services/storage.service';
 import { MessageDisplayComponent } from '../message-display/message-display.component';
 import { AsyncPipe, NgIf } from '@angular/common';
 
@@ -13,7 +14,9 @@ import { AsyncPipe, NgIf } from '@angular/common';
 })
 export class MessageListComponent implements OnInit {
   requestService = inject(RequestService)
+  storageService = inject(StorageService)
   data: any
+  currentUser = this.storageService.currentUser
 
   fetchMessages() {
     this.requestService.getData("text_messages").subscribe( response => {
@@ -21,6 +24,8 @@ export class MessageListComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {this.fetchMessages()}
+  ngOnInit(): void {
+    this.fetchMessages()
+  }
 
 }

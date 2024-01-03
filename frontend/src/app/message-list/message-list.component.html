@@ -1,6 +1,11 @@
-<h2>Message History ({{data.length}})</h2>
-<ng-container class="message-group" >
-    @for (message of data; track message.id) {
-        <app-message-display [message]="message"></app-message-display>
-    }
-</ng-container>
+@if (storageService.isEmpty()) {
+    <p>Login or sign up to show message list!</p>
+} @else {
+    <h2>Message History ({{data ? data.length : 0}})</h2>
+    <ng-container class="message-group" >
+        @for (message of data; track message.id) {
+            <app-message-display [message]="message"></app-message-display>
+        }
+    </ng-container>
+}
+

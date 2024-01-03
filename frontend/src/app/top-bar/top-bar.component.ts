@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, Output } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { RequestService } from '../services/request.service';
 import { StorageService } from '../services/storage.service';
@@ -24,12 +24,19 @@ export class TopBarComponent {
       password: ""
     }            
   }
+  currentUser = {}
+
+  ngOnInit() {
+    this.currentUser = this.storageService.getUser()
+  }
+
+  // store getuser to a variable? as it is, the cookie and user might be present without the component "knowing" so
 
   onSubmit(event: any) {
     event.submitter.id == "signup" ? this.onSignup() : this.onLogin()
   }
 
-  onSignup() {
+  public onSignup() {
     this.requestService.postData("signup", this.userData).subscribe({
       next: data => {
         console.log(data);
@@ -37,35 +44,40 @@ export class TopBarComponent {
         this.isSignupFailed = false;
       },
       error: err => {
-        this.errorMessage = err.error.message;
+        console.log(err)
+        this.errorMessage = err.error.status.message;
         this.isSignupFailed = true;
       }
     });
   }
   
-  onLogin() {
+  public onLogin() {
     this.requestService.postData("login", this.userData).subscribe({
       next: data => {
         this.storageService.saveUser(data);
 
         this.isLoginFailed = false;
-        this.isLoggedIn = true;
+        window.location.reload();
       },
       error: err => {
-        this.errorMessage = err.error.message;
+        console.log(err)
+        this.errorMessage = err.error.status.message;
         this.isLoginFailed = true;
       }
     })
   }
 
-  onSignout() {
-    this.requestService.postData("logout", this.userData).subscribe({
+  public onSignout() {
+    this.requestService.deleteData("logout").subscribe({
       next: _data => {
+        this.storageService.clean()
         this.isLoggedIn = false;
+        window.location.reload();
       },
       error: err => {
-        this.errorMessage = err.error.message;
+        this.errorMessage = err.error.status.message;
       }
     })
+
   }
 }

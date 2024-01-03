@@ -1,7 +1,6 @@
 class TextMessagesController < ApplicationController
     def create
         @message = TextMessage.new(text_message_params)
-        debugger
         if @message.save!
             twilio_service = TwilioService.new("+#{text_message_params[:phone_number]}")
             twilio_service.send_message(text_message_params[:message])
@@ -13,7 +12,7 @@ class TextMessagesController < ApplicationController
     end
 
     def index
-        @text_messages = TextMessage.all 
+        @text_messages = current_user ? TextMessage.where(user_id: current_user.id) : {}
         render json: @text_messages
     end
 

@@ -14,6 +14,7 @@ export class RequestService {
 
     requestOptions = {
         headers: { 'Content-Type': 'application/json',
+                   'Accept': 'application/json',
                     observe: 'response'
                 }
     }
@@ -21,6 +22,10 @@ export class RequestService {
 
     public getData(url: string) {
         return this.http.get(`${this.url_base}/${url}`)
+    }
+
+    public deleteData(url: string) {
+        return this.http.delete(`${this.url_base}/${url}`)
     }
 
     public postData(url: string, params: any) {

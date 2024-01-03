@@ -3,20 +3,28 @@ import { Injectable } from '@angular/core';
 const USER_KEY = 'auth-user';
 const TOKEN_KEY = 'auth-token';
 
+// interface User {
+//     id: number
+//   }
+
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
   constructor() {}
+  
 
-  clean() {
+  currentUser = {}
+
+  public clean() {
     window.sessionStorage.clear();
+    this.currentUser = {}
   }
 
   public saveUser(user: any) {
-    debugger
     window.sessionStorage.removeItem(USER_KEY);
-    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user.status.data));
+    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user.status.data.user));
+    this.currentUser = JSON.stringify(user.status.data.user)
   }
 
   public saveToken(token: any) {
@@ -27,6 +35,7 @@ export class StorageService {
   public getUser() {
     const user = window.sessionStorage.getItem(USER_KEY);
     if (user) {
+      this.currentUser = JSON.parse(user)
       return JSON.parse(user);
     }
 
@@ -41,4 +50,13 @@ export class StorageService {
 
     return false;
   }
+
+  public isEmpty() {
+    for(var prop in this.currentUser) {
+      if(this.currentUser.hasOwnProperty(prop))
+          return false;
+    }
+    return true;
+  }
+
 }
