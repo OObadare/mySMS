@@ -1,0 +1,19 @@
+.display-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.message-box-sm {
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    min-height: 40px;
+    overflow-wrap: break-word;
+}
+
+.bottom-display-bar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}

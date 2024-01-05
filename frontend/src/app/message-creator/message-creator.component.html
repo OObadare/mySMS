@@ -1,13 +1,42 @@
-<h2> New Message </h2>
+
 @if (storageService.isEmpty()) {
     <p>Log in or sign up to send a message!</p>
 } @else {
+    <h2> New Message </h2>
     <form class="message-creator-form" (ngSubmit)="onSubmit()" #messageCreator="ngForm">
         <label>Phone Number: </label>
-        <input id="phoneNumber" type="text" name="phone" [(ngModel)]="textMessage['phoneNumber']"/>
+        <input id="phoneNumber" 
+               type="text" 
+               name="phone" 
+               [(ngModel)]="textMessage['phoneNumber']"
+               #phone = "ngModel"
+               required/>
+        @if (phone.errors && phone.touched) {
+            <div class="error-msg">
+                @if (phone.errors['required']) {
+                <div class="error-msg">Phone number is required</div>
+                }
+            </div>
+        }
         <label>Message: </label>
-        <textarea id="message" type="text" name ="message" [(ngModel)]="textMessage['message']"></textarea>
-        <button type="submit">Submit</button>
+        <textarea id="message" 
+                  type="text" 
+                  name ="message" 
+                  maxlength="250" 
+                  [(ngModel)]="textMessage['message']"
+                  #message = "ngModel"
+                  required></textarea>
+        @if (message.errors && message.touched) {
+            <div class="error-msg">
+                @if (message.errors['required']) {
+                <div class="error-msg">message is required</div>
+                }
+                @if (message.errors['maxlength']) {
+                    <div class="error-msg">Message must be less than 250 characters</div>
+                    }
+            </div>
+        }
+        <button [disabled]="messageCreator.invalid" type="submit">Submit</button>
         @if (this.errorMessage.length > 0) {
             <p> Message Creation Error: {{this.errorMessage}}</p>
         }

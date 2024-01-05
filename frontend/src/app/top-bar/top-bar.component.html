@@ -2,18 +2,20 @@
     <h1>MySMSApp</h1>
     @if (storageService.isEmpty()) {
         <form (ngSubmit)="onSubmit($event)" #topBar="ngForm">
-            <label>Email: </label>
-            <input id="email" 
-                   type="text" 
-                   name="email" 
-                   [(ngModel)]="userData.user['email']"
-                   required
-                   #email="ngModel"
-                   email
-            />
+            <div class="input-row">
+                <label>Email: </label>
+                <input id="email" 
+                       type="text" 
+                       name="email" 
+                       [(ngModel)]="userData.user['email']"
+                       required
+                       #email="ngModel"
+                       email
+                />
+            </div>
             <div class="invalid-form">
                 @if (email.errors && topBar.submitted) {
-                    <div class="invalid-feedback">
+                    <div class="error-msg">
                         @if (email.errors['required']) {
                         <div>Email is required</div>
                         }
@@ -24,30 +26,32 @@
                 }
 
             </div>
-            <label>Password: </label>
-            <input id="password" 
-                   type="text" 
-                   name ="password" 
-                   [(ngModel)]="userData.user['password']"
-                   #password="ngModel"
-                   required
-                   minlength="6"
-                   >
+            <div class="input-row">
+                <label>Password:  </label>
+                <input id="password" 
+                       type="text" 
+                       name ="password" 
+                       [(ngModel)]="userData.user['password']"
+                       #password="ngModel"
+                       required
+                       minlength="6"
+                       > 
+            </div>
             @if (password.errors && topBar.submitted) {
-                <div class="invalid-form">
+                <div class="error-msg">
                     @if (password.errors['required']) {
-                    <div>Password is required</div>
+                    <div class="error-msg">Password is required</div>
                     }
                     @if (password.errors['minlength']) {
-                    <div>Password must be at least 6 characters</div>
+                    <div class="error-msg">Password must be at least 6 characters</div>
                     }
                 </div>
             }
             <div class="button-container">
-                <button type="submit" id="signup">Sign Up</button>
-                <button type="submit" id="login">Log In</button>
+                <button [disabled]="topBar.invalid" type="submit" id="signup">Sign Up</button>
+                <button [disabled]="topBar.invalid" type="submit" id="login">Log In</button>
                 @if (topBar.submitted && (isSignupFailed || isLoginFailed)) {
-                    <div class="alert alert-warning">
+                    <div class="alert alert-warning error-msg">
                       Failure!<br />{{ errorMessage }}
                     </div>
                     }

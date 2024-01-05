@@ -17,10 +17,15 @@ class TwilioService
     def send_message(body)
         @client = Twilio::REST::Client.new(@account_sid, @auth_token)
 
-        text = @client.messages.create(
-            from: @twilio_number,
-            to: @receiver_number,
-            body: body
-        )
+        begin 
+            text = @client.messages.create(
+                from: @twilio_number,
+                to: @receiver_number,
+                body: body
+            )
+        rescue Twilio::REST::RestError => e
+            Rails.logger.error("Twilio Error: #{e}")
+            return e
+        end
     end
 end
