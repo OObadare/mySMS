@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  phone_number: MyString
-  message: MyText
-  status: MyString
+  phone_number: "+15807165916"
+  message: "We Love Text"
+  status: "sent"
   user_id: 1
 
 two:
-  phone_number: MyString
-  message: MyText
-  status: MyString
-  user_id: 1
+  phone_number: "+15807165916"
+  message: "JK we actually hate text"
+  status: "error"
+  user_id: 2

@@ -14,6 +14,7 @@ class TextMessagesController < ApplicationController
                 render json: { message: 'Message sent successfully', status: 'success' }, status: :created
             end
         else
+            debugger
             render json: { errors: @message.errors.full_messages, status: 'error' }, status: :unprocessable_entity
         end
     end
