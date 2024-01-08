@@ -38,3 +38,6 @@
 !/app/assets/builds/.keep
 
 /node_modules
+app.yaml
+config/database.yml
+config/database.yml

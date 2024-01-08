@@ -78,7 +78,11 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: my_sms_production
-  username: my_sms
-  password: <%= ENV["MY_SMS_DATABASE_PASSWORD"] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  username: "postgres"
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  database: "my-sms-postgres"
+  host:   "/cloudsql/mysmsapp-410618:us-central1:my-sms-postgres"

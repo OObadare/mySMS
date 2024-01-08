@@ -77,3 +77,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "appengine", "~> 0.7.0"

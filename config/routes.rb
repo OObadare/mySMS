@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'frontend/index'
   devise_for :users, path: '', path_names: {
     sign_in: 'login',
     sign_out: 'logout',
@@ -19,4 +20,8 @@ Rails.application.routes.draw do
   # root "posts#index"
   get '/text_messages', to:'text_messages#index'
   post '/text_messages', to:'text_messages#create' 
+
+  get '*path', to: 'frontend#index', constraints: ->(request) do
+    !request.xhr? && request.format.html?
+  end
 end

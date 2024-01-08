@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of  } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 
 
@@ -9,7 +10,7 @@ import { Observable, of  } from 'rxjs';
 })
 export class RequestService {
     // env var for base url
-    private url_base = "http://localhost:3000"
+    private url_base = environment.apiUrl
     constructor (private http: HttpClient) { };
 
     requestOptions = {
